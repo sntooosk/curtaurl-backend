@@ -18,14 +18,19 @@ import java.time.LocalDateTime;
 public class URL {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "tb01_id")
+    @Column(name = "tb01_uid")
     private String uid;
 
+    @Column(name = "tb01_longurl")
     private String longUrl;
+
+    @Column(name = "tb01_shorturl")
     private String shortUrl;
     
     @OneToOne(cascade = CascadeType.PERSIST)
+    @Column(name = "tb01_qrcode")
     private QrCode qrCode;
-    
+
+    @Column(name = "tb01_createdat")
     private LocalDateTime createdAt;
 }
