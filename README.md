@@ -18,7 +18,7 @@ CurtaURL é um encurtador de links desenvolvido em Java com Spring Boot, projeta
 1. Faça uma requisição POST para o endpoint, passando no corpo da requisição o seguinte JSON:
     ```json
     {
-        "urlLonga": "seusiteaqui"
+        "longUrl": "seusiteaqui"
     }
     ```
 
