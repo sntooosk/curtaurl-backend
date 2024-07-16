@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-
 @Entity
 @Table(name = "tb01_urls")
 @NoArgsConstructor
@@ -16,6 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class URL {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "tb01_uid")
@@ -26,9 +26,9 @@ public class URL {
 
     @Column(name = "tb01_shorturl")
     private String shortUrl;
-    
+
     @OneToOne(cascade = CascadeType.PERSIST)
-    @Column(name = "tb01_qrcode")
+    @JoinColumn(name = "tb01_qrcode")
     private QrCode qrCode;
 
     @Column(name = "tb01_createdat")
