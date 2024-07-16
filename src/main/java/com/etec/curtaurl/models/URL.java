@@ -28,7 +28,6 @@ public class URL {
     private String shortUrl;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "tb01_qrcode")
     private QrCode qrCode;
 
     @Column(name = "tb01_createdat")
