@@ -16,11 +16,9 @@ public class QrCode {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "tb02_uid")
+    @Column(name = "tb02_uid", nullable = false, updatable = false)
     private String uid;
 
-    @Column(name = "tb02_qrcodes_imgs", length = 1024)
-    private String QrCodeImage;
-
-
+    @Column(name = "tb02_qrcodes_imgs", nullable = false, length = 2048)
+    private String qrCodeImage;
 }

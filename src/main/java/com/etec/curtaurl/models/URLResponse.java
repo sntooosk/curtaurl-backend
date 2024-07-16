@@ -2,13 +2,17 @@ package com.etec.curtaurl.models;
 
 import java.time.LocalDateTime;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Builder
-public record URLResponse(
-        String uid,
-        String longUrl,
-        String shortUrl,
-        QrCode qrCode,
-        LocalDateTime createdAt
-        ){}
+@Getter
+@Setter
+@AllArgsConstructor
+public class URLResponse{
+        String uid;
+        String longUrl;
+        String shortUrl;
+        QrCode qrCode;
+        LocalDateTime createdAt;
+}

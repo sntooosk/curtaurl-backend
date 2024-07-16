@@ -25,6 +25,10 @@ public class URLService {
     }
 
     public URL shortenUrl(String originalUrl) throws IOException, WriterException {
+        if (originalUrl == null || originalUrl.isEmpty()) {
+            throw new IllegalArgumentException("Original URL cannot be null or empty");
+        }
+
         URL url = new URL();
         url.setLongUrl(originalUrl);
         url.setShortUrl(generateRandomUrl());
@@ -34,10 +38,14 @@ public class URLService {
     }
 
     public URL getOriginalUrl(String shortUrl) {
-        try {
-            return urlRepository.findByShortUrl(shortUrl);
-        } catch (Exception e) {
-            throw new RuntimeException("URL not found in our records", e);
+        if (shortUrl == null || shortUrl.isEmpty()) {
+            throw new IllegalArgumentException("Short URL cannot be null or empty");
         }
+
+        URL url = urlRepository.findByShortUrl(shortUrl);
+        if (url == null) {
+            throw new RuntimeException("URL not found in our records");
+        }
+        return url;
     }
 }

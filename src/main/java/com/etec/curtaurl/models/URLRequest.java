@@ -1,8 +1,8 @@
 package com.etec.curtaurl.models;
 
-import java.time.LocalDateTime;
+import lombok.Getter;
 
-import lombok.Builder;
-
-@Builder
-public record URLRequest(String longUrl){}
+@Getter
+public class URLRequest {
+    String longUrl;
+}

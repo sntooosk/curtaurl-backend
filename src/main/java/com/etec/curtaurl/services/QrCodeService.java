@@ -16,9 +16,13 @@ import java.util.Base64;
 @Service
 public class QrCodeService {
 
-    public QrCode generateQrCode(String originalUrl) throws IOException, WriterException {
+    public QrCode generateQrCode(String contents) throws IOException, WriterException {
+        if (contents == null || contents.isEmpty()) {
+            throw new IllegalArgumentException("Contents for QR Code cannot be null or empty");
+        }
+
         int imageSize = 200;
-        BitMatrix matrix = new MultiFormatWriter().encode(originalUrl, BarcodeFormat.QR_CODE, imageSize, imageSize);
+        BitMatrix matrix = new MultiFormatWriter().encode(contents, BarcodeFormat.QR_CODE, imageSize, imageSize);
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         MatrixToImageWriter.writeToStream(matrix, "png", bos);
         String image = Base64.getEncoder().encodeToString(bos.toByteArray());

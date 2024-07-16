@@ -18,18 +18,19 @@ public class URL {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "tb01_uid")
+    @Column(name = "tb01_uid", nullable = false, updatable = false)
     private String uid;
 
-    @Column(name = "tb01_longurl")
+    @Column(name = "tb01_longurl", nullable = false, length = 2048)
     private String longUrl;
 
-    @Column(name = "tb01_shorturl")
+    @Column(name = "tb01_shorturl", nullable = false, unique = true, length = 20)
     private String shortUrl;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "tb01_qrcode_uid", referencedColumnName = "tb02_uid")
     private QrCode qrCode;
 
-    @Column(name = "tb01_createdat")
+    @Column(name = "tb01_createdat", nullable = false)
     private LocalDateTime createdAt;
 }
