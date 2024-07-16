@@ -10,6 +10,5 @@ public record URLResponse(
         String longUrl,
         String shortUrl,
         QrCode qrCode,
-        LocalDateTime createdAt) {
-
-}
+        LocalDateTime createdAt
+        ){}

@@ -1,6 +1,7 @@
 package com.etec.curtaurl.controllers;
 
 import com.etec.curtaurl.models.URL;
+import com.etec.curtaurl.models.URLRequest;
 import com.etec.curtaurl.models.URLResponse;
 import com.etec.curtaurl.services.URLService;
 import com.google.zxing.WriterException;
@@ -21,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Objects;
 
 @Tag(name = "URL Shortening API", description = "API for shortening URLs and redirecting to the original URLs")
@@ -40,8 +40,8 @@ public class URLController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping("/shorten")
-    public ResponseEntity<URLResponse> generateUrl(@RequestBody Map<String, String> request) throws IOException, WriterException {
-        String originalUrl = request.get("longUrl");
+    public ResponseEntity<URLResponse> generateUrl(@RequestBody @Schema(description = "Request body to generate shortened URL", required = true) URLRequest request) throws IOException, WriterException {
+        String originalUrl = request.longUrl();
         URL url = urlService.shortenUrl(originalUrl);
 
         String redirectUrl = "https://curtaurl-backend.onrender.com/r/" + url.getShortUrl();
@@ -63,7 +63,7 @@ public class URLController {
             @ApiResponse(responseCode = "404", description = "URL not found")
     })
     @GetMapping("/r/{shortUrl}")
-    public void redirectUrl(@PathVariable String shortUrl, HttpServletResponse response) throws IOException {
+    public void redirectUrl(@PathVariable @Schema(description = "Shortened URL", required = true) String shortUrl, HttpServletResponse response) throws IOException {
         URL url = urlService.getOriginalUrl(shortUrl);
 
         if (Objects.nonNull(url)) {
