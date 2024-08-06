@@ -27,7 +27,7 @@ public class URLController {
         String originalUrl = request.get("longUrl");
         URL url = urlService.shortenUrl(originalUrl);
 
-        String redirectUrl = "https://curtaurl-backend.onrender.com/r/" + url.getShortUrl();
+        String redirectUrl = "http://localhost:8081/r/" + url.getShortUrl();
         URLResponse response = new URLResponse(
                 url.getUid(),
                 url.getLongUrl(),
